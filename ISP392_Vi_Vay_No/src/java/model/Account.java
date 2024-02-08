@@ -29,7 +29,7 @@ public class Account {
     private String avatarUrl;
     private boolean gender; // Assuming true for one gender and false for another
     private int role_id; // Foreign key to Role
-    private int salt_id;
+
     public Account() {
     }
 
@@ -48,7 +48,6 @@ public class Account {
         this.avatarUrl = avatarUrl;
         this.gender = gender;
         this.role_id = role_id;
-        this.salt_id = salt_id;
     }
 
     public int getId() {
@@ -163,17 +162,7 @@ public class Account {
         this.role_id = role_id;
     }
 
-    public int getSalt_id() {
-        return salt_id;
-    }
-
-    public void setSalt_id(int salt_id) {
-        this.salt_id = salt_id;
-    }
-
-    
-    
-    
+   
     
 }
 

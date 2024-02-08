@@ -11,21 +11,26 @@ import java.security.Timestamp;
  * @author MINIMONIE
  */
 public class Notification {
-  private int id;
-  private Timestamp notificationDate;
-  private String status;
-  private String description;
-  private int debtdetails_id;
+
+    private int id;
+    private Timestamp notificationDate;
+    private String status;
+    private String discription;
+    private int debtdetails_id;
+    private int debtdetails_debtor_id;
+     private int debtdetails_debtor_account_id;
 
     public Notification() {
     }
 
-    public Notification(int id, Timestamp notificationDate, String status, String description, int debtdetails_id) {
+    public Notification(int id, Timestamp notificationDate, String status, String discription, int debtdetails_id, int debtdetails_debtor_id, int debtdetails_debtor_account_id) {
         this.id = id;
         this.notificationDate = notificationDate;
         this.status = status;
-        this.description = description;
+        this.discription = discription;
         this.debtdetails_id = debtdetails_id;
+        this.debtdetails_debtor_id = debtdetails_debtor_id;
+        this.debtdetails_debtor_account_id = debtdetails_debtor_account_id;
     }
 
     public int getId() {
@@ -52,12 +57,12 @@ public class Notification {
         this.status = status;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDiscription() {
+        return discription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDiscription(String discription) {
+        this.discription = discription;
     }
 
     public int getDebtdetails_id() {
@@ -68,10 +73,21 @@ public class Notification {
         this.debtdetails_id = debtdetails_id;
     }
 
-    @Override
-    public String toString() {
-        return "Notification{" + "id=" + id + ", notificationDate=" + notificationDate + ", status=" + status + ", description=" + description + ", debtdetails_id=" + debtdetails_id + '}';
+    public int getDebtdetails_debtor_id() {
+        return debtdetails_debtor_id;
     }
-  
-  
+
+    public void setDebtdetails_debtor_id(int debtdetails_debtor_id) {
+        this.debtdetails_debtor_id = debtdetails_debtor_id;
+    }
+
+    public int getDebtdetails_debtor_account_id() {
+        return debtdetails_debtor_account_id;
+    }
+
+    public void setDebtdetails_debtor_account_id(int debtdetails_debtor_account_id) {
+        this.debtdetails_debtor_account_id = debtdetails_debtor_account_id;
+    }
+
+   
 }

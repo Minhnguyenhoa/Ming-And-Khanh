@@ -11,19 +11,18 @@ import java.security.Timestamp;
  * @author MINIMONIE
  */
 public class Interest_rate {
+
     private int id;
-    private int id_debtDetails;
-    private double interest_rate;
-    private Timestamp date_of_application;
+    private double interestRate;
+    private Timestamp dateOfApplication;
 
     public Interest_rate() {
     }
 
-    public Interest_rate(int id, int id_debtDetails, double interest_rate, Timestamp date_of_application) {
+    public Interest_rate(int id, double interestRate, Timestamp dateOfApplication) {
         this.id = id;
-        this.id_debtDetails = id_debtDetails;
-        this.interest_rate = interest_rate;
-        this.date_of_application = date_of_application;
+        this.interestRate = interestRate;
+        this.dateOfApplication = dateOfApplication;
     }
 
     public int getId() {
@@ -34,33 +33,20 @@ public class Interest_rate {
         this.id = id;
     }
 
-    public int getId_debtDetails() {
-        return id_debtDetails;
+    public double getInterestRate() {
+        return interestRate;
     }
 
-    public void setId_debtDetails(int id_debtDetails) {
-        this.id_debtDetails = id_debtDetails;
+    public void setInterestRate(double interestRate) {
+        this.interestRate = interestRate;
     }
 
-    public double getInterest_rate() {
-        return interest_rate;
+    public Timestamp getDateOfApplication() {
+        return dateOfApplication;
     }
 
-    public void setInterest_rate(double interest_rate) {
-        this.interest_rate = interest_rate;
+    public void setDateOfApplication(Timestamp dateOfApplication) {
+        this.dateOfApplication = dateOfApplication;
     }
 
-    public Timestamp getDate_of_application() {
-        return date_of_application;
-    }
-
-    public void setDate_of_application(Timestamp date_of_application) {
-        this.date_of_application = date_of_application;
-    }
-
-    @Override
-    public String toString() {
-        return "Interest_rate{" + "id=" + id + ", id_debtDetails=" + id_debtDetails + ", interest_rate=" + interest_rate + ", date_of_application=" + date_of_application + '}';
-    }
-    
 }

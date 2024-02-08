@@ -18,13 +18,13 @@ public class DebtDetail {
     private String image;
     private Timestamp creatAt;
     private String qr;
-    private int debtor_IdDebtor;
+    private int debtor_id;
     private int interest_rate_id;
 
     public DebtDetail() {
     }
 
-    public DebtDetail(int id, String description, boolean deptType, double amount, String image, Timestamp creatAt, String qr, int debtor_IdDebtor, int interest_rate_id) {
+    public DebtDetail(int id, String description, boolean deptType, double amount, String image, Timestamp creatAt, String qr, int debtor_id, int interest_rate_id) {
         this.id = id;
         this.description = description;
         this.deptType = deptType;
@@ -32,7 +32,7 @@ public class DebtDetail {
         this.image = image;
         this.creatAt = creatAt;
         this.qr = qr;
-        this.debtor_IdDebtor = debtor_IdDebtor;
+        this.debtor_id = debtor_id;
         this.interest_rate_id = interest_rate_id;
     }
 
@@ -92,12 +92,12 @@ public class DebtDetail {
         this.qr = qr;
     }
 
-    public int getDebtor_IdDebtor() {
-        return debtor_IdDebtor;
+    public int getDebtor_id() {
+        return debtor_id;
     }
 
-    public void setDebtor_IdDebtor(int debtor_IdDebtor) {
-        this.debtor_IdDebtor = debtor_IdDebtor;
+    public void setDebtor_id(int debtor_id) {
+        this.debtor_id = debtor_id;
     }
 
     public int getInterest_rate_id() {
@@ -108,9 +108,6 @@ public class DebtDetail {
         this.interest_rate_id = interest_rate_id;
     }
 
-    @Override
-    public String toString() {
-        return "DebtDetail{" + "id=" + id + ", description=" + description + ", deptType=" + deptType + ", amount=" + amount + ", image=" + image + ", creatAt=" + creatAt + ", qr=" + qr + ", debtor_IdDebtor=" + debtor_IdDebtor + ", interest_rate_id=" + interest_rate_id + '}';
-    }
+    
     
 }
