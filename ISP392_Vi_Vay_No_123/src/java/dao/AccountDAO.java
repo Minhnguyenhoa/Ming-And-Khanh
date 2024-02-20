@@ -28,6 +28,12 @@ public class AccountDAO {
         db = DBContext.getInstance();
     }
 
+    public static void main(String[] args) {
+        AccountDAO dao = new AccountDAO();
+        Account a = dao.findByUsernameAndPassword("minimonie", "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3");
+        System.out.println(a.getEmailAddress());
+    }
+    
     public Account findByUsernameAndPassword(String username, String password) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -50,12 +56,16 @@ public class AccountDAO {
                 String pass = rs.getString("password");
                 String name = rs.getString("name");
                 String email = rs.getString("emailAddress");
-
+                String mobileNumber = rs.getString("mobileNumber");
+                String address = rs.getString("address");
+                
                 account.setId(id);
                 account.setUsername(un);
                 account.setPassword(pass);
                 account.setName(name);
                 account.setEmailAddress(email);
+                account.setMobileNumber(mobileNumber);
+                account.setAddress(address);
                 // Ví dụ: account.setUsername(rs.getString("username"));
                 //        account.setPassword(rs.getString("password"));
                 // Thêm các trường khác tương tự
@@ -303,12 +313,41 @@ public class AccountDAO {
         return null;
     }
 
+//    public Account updateAccount(Account acc) {
+//        if (acc == null || acc.getId() == 0) {
+//            return null; //
+//        }
+//
+//        String sql = "UPDATE account SET username = ?, password = ?, name = ?, mobileNumber = ?, emailAddress = ?, address = ?, IsActive = ?, UpdateAt = CURRENT_TIMESTAMP,  avatarUrl = ?, gender = ?, role_id = ? WHERE id = ?";
+//        try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
+//            ps.setString(1, acc.getUsername());
+//            ps.setString(2, acc.getPassword());
+//            ps.setString(3, acc.getName());
+//            ps.setString(4, acc.getMobileNumber());
+//            ps.setString(5, acc.getEmailAddress());
+//            ps.setString(6, acc.getAddress());
+//            ps.setBoolean(7, acc.isIsActive());        
+//            ps.setString(9, acc.getAvatarUrl());
+//            ps.setBoolean(10, acc.isGender());
+//            ps.setInt(11, acc.getRole_id());
+//            ps.setInt(12, acc.getId());
+//
+//            int affectedRows = ps.executeUpdate();
+//            if (affectedRows > 0) {
+//                return acc;
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//        }
+//        return null;
+//    }
+    
     public Account updateAccount(Account acc) {
         if (acc == null || acc.getId() == 0) {
             return null; //
         }
 
-        String sql = "UPDATE account SET username = ?, password = ?, name = ?, mobileNumber = ?, emailAddress = ?, address = ?, IsActive = ?, UpdateAt = CURRENT_TIMESTAMP, CreateAt = ?, avatarUrl = ?, gender = ?, role_id = ? WHERE id = ?";
+        String sql = "UPDATE account SET name = ?, mobileNumber = ?, emailAddress = ?, address = ?, password = ? WHERE id = ?";
         try (PreparedStatement ps = db.getConnection().prepareStatement(sql)) {
             ps.setString(1, acc.getUsername());
             ps.setString(2, acc.getPassword());
@@ -316,13 +355,6 @@ public class AccountDAO {
             ps.setString(4, acc.getMobileNumber());
             ps.setString(5, acc.getEmailAddress());
             ps.setString(6, acc.getAddress());
-            ps.setBoolean(7, acc.isIsActive());        
-            ps.setTimestamp(8, acc.getCreateAt());
-            ps.setString(9, acc.getAvatarUrl());
-            ps.setBoolean(10, acc.isGender());
-            ps.setInt(11, acc.getRole_id());
-            ps.setInt(12, acc.getId());
-
             int affectedRows = ps.executeUpdate();
             if (affectedRows > 0) {
                 return acc;
@@ -330,7 +362,7 @@ public class AccountDAO {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return null;
+        return acc;
     }
 
     public Account getAccountById(int accountId) {
@@ -423,6 +455,24 @@ public class AccountDAO {
 
         return false;
     }
+    public static boolean isValidPhoneNumber(String phoneNumber) {
+        // Regex for a valid phone number
+        String regex = "^[0-9]{1}[0-9\\-\\s]{9,14}$";
+
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+
+        // If the phone number is empty
+        // return false
+        if (phoneNumber == null) {
+            return false;
+        }
+
+        // Pattern class contains matcher() method
+        // to find matching between given phone number
+        // and regular expression
+        return p.matcher(phoneNumber).matches();
+    }
 
     public boolean checkUsernameAndEmailExists(String username, String emailAddress) {
         PreparedStatement pstmt = null;
@@ -430,7 +480,7 @@ public class AccountDAO {
 
         try {
             // Chuẩn bị câu truy vấn SQL
-            String query = "SELECT * FROM account WHERE username = ? AND emailAddress = ?";
+            String query = "SELECT * FROM account WHERE username = ? or emailAddress = ?";
             pstmt = db.getConnection().prepareStatement(query);
             pstmt.setString(1, username);
             pstmt.setString(2, emailAddress);
@@ -443,19 +493,7 @@ public class AccountDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        } finally {
-            // Đóng tất cả các tài nguyên
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        } 
     }
 
     public boolean updatePassword(String username, String newPassword) {
@@ -533,26 +571,7 @@ public class AccountDAO {
             return false;
         }
     }
-
     
-       public static void main(String[] args) {
-        AccountDAO accDAO = new AccountDAO();
-        String username = "minimonie";
-        String password = "123";
-        Account acc = accDAO.findByUsernameAndPassword(username, password);
-        if (acc != null) {
-            System.out.println("Successful!");
-        } else {
-            System.out.println("Login Failed!");
-            System.out.println(accDAO.isAdmin(username));
-        }
-        String email = "phuong2532005@gmail.com";
-        String phone = "0123456789";
-        System.out.println(accDAO.isEmailExist(email));
-        System.out.println(accDAO.isEmailValid(email));
-        System.out.println(accDAO.isPhoneExist(phone));
-    }
-
     public Account getProfileByUsername(String username) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

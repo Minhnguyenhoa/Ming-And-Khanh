@@ -162,10 +162,6 @@ public class Account {
         this.salt_id = salt_id;
     }
 
-    
-    
-    
-    
 }
 
 

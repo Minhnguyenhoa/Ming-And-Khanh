@@ -4,66 +4,82 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Edit Profile</title>
-        <link rel="stylesheet" href=".../css/editprofile.css">
+        <link rel="stylesheet" href="../css/editprofile.css">
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css'>
     </head>
     <body>
         <jsp:include page="/navigator/toast.jsp" />
-        <div class="container bootstrap snippets bootdey">
-            <h1 class="text-primary">Edit Profile</h1>
-            <hr>
-            <form class="form-horizontal" role="form" action="<c:url value='/editprofile'/>" method="post" enctype="multipart/form-data">
+        <form action="editprofile" method="post">
+            <div class="container bootstrap snippets bootdey">
+                <h1 class="text-primary">Edit Profile</h1>
                 <div class="row">
-                    <!-- left column for avatar -->
+                    <!--left column for avatar--> 
                     <div class="col-md-3">
                         <div class="text-center">
-                            <img src="//bootdey.com/img/Content/avatar/avatar7.png" class="avatar img-circle img-thumbnail" alt="avatar">
-                            <h6>Upload a different photo...</h6>
-                            <input type="file" class="form-control" name="avatar">
+                            <img id="avatarImage" src="${account.avatarUrl == null ? '//bootdey.com/img/Content/avatar/avatar7.png' : account.avatarUrl}" class="avatar img-circle img-thumbnail" alt="avatar">
+                            <input type="file" class="form-control" onchange="updateAvatar(this)">
+                            <input type="hidden" class="form-control mt-3" id="avatarInput" name="avatar" value="${account.avatarUrl}">
                         </div>
+
+                        <script>
+                            function updateAvatar(input) {
+                                if (input.files && input.files[0]) {
+                                    var reader = new FileReader();
+
+                                    reader.onload = function (e) {
+                                        document.getElementById('avatarImage').setAttribute('src', e.target.result);
+                                        document.getElementById('avatarInput').value = e.target.result;
+                                    }
+
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+                            }
+                        </script>
+
                     </div>
 
-                    <!-- edit form column -->
+                    <!--edit form column--> 
                     <div class="col-md-9 personal-info">
                         <h3>Personal info</h3>
+
+                        <input type="hidden" name="id" value="${sessionScope.account.id}">
 
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Full name:</label>
                             <div class="col-lg-8">
-                                <input class="form-control" type="text" name="fullName" value="">
+                                <input class="form-control" type="text" name="name" value="${sessionScope.account.name}" required>
                             </div>
                         </div>
-
-                        <!-- Username form group -->
+                        <!--Username form group--> 
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Username:</label>
                             <div class="col-lg-8">
-                                <input class="form-control" type="text" name="username" value="">
+                                <input class="form-control" type="text" name="username" value="${sessionScope.account.username}" disabled>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Phone:</label>
                             <div class="col-lg-8">
-                                <input class="form-control" type="text" name="phone" value="">
+                                <input class="form-control" type="text" name="phone" value="${sessionScope.account.mobileNumber}" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Address:</label>
                             <div class="col-lg-8">
-                                <input class="form-control" type="text" name="address" value="">
+                                <input class="form-control" type="text" name="address" value="${sessionScope.account.address}" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Email:</label>
                             <div class="col-lg-8">
-                                <input class="form-control" type="email" name="email" value="">
+                                <input class="form-control" type="text" name="email" value="${sessionScope.account.emailAddress}" disabled>
                             </div>
                         </div>
 
-                        <!-- Submit and Cancel buttons -->
+                        <!--Submit and Cancel buttons--> 
                         <div class="form-group">
                             <label class="col-md-3 control-label"></label>
                             <div class="col-md-8">
@@ -72,10 +88,10 @@
                                 <input type="reset" class="btn btn-default" value="Cancel">
                             </div>
                         </div>
+                        
                     </div>
                 </div>
-            </form>
-        </div>
-        <hr>
+            </div>
+        </form>
     </body>
 </html>

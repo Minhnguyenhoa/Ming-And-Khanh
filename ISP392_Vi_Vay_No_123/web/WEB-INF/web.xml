@@ -25,16 +25,8 @@
         <servlet-class>controller.VerifyCaptchaController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ChangpasswordController</servlet-name>
-        <servlet-class>controller.ChangpasswordController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EditProfileController</servlet-name>
         <servlet-class>controller.EditProfileController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EditPasswordController</servlet-name>
-        <servlet-class>controller.EditPasswordController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DashBoardAdminController</servlet-name>
@@ -43,6 +35,26 @@
     <servlet>
         <servlet-name>AccountController</servlet-name>
         <servlet-class>controller.AccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DebtController</servlet-name>
+        <servlet-class>controller.DebtController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DebtorController</servlet-name>
+        <servlet-class>controller.DebtorController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SortController</servlet-name>
+        <servlet-class>controller.SortController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <servlet-class>controller.ResetPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>controller.ChangePasswordController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -69,16 +81,8 @@
         <url-pattern>/verify</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ChangpasswordController</servlet-name>
-        <url-pattern>/changepassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>EditProfileController</servlet-name>
         <url-pattern>/editprofile</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditPasswordController</servlet-name>
-        <url-pattern>/editpassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DashBoardAdminController</servlet-name>
@@ -87,5 +91,25 @@
     <servlet-mapping>
         <servlet-name>AccountController</servlet-name>
         <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DebtController</servlet-name>
+        <url-pattern>/debt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DebtorController</servlet-name>
+        <url-pattern>/debtor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SortController</servlet-name>
+        <url-pattern>/sort</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <url-pattern>/reset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/changepassword</url-pattern>
     </servlet-mapping>
 </web-app>
